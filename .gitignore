@@ -1,0 +1,11 @@
+.bazeliskrc
+.ijwb/
+bazel-bin
+bazel-out
+bazel-testlogs
+bazel-protobuf-javalite-util
+.gradle
+.idea
+build/
+local.properties
+*.iml

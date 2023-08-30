@@ -1,0 +1,35 @@
+apply plugin: 'maven'
+
+afterEvaluate {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.groupId = GROUP
+                pom.artifactId = POM_ARTIFACT_ID
+                pom.version = VERSION_NAME
+                repository(url: "http://nexus.example.co/content/repositories/releases") {
+                // repository(url: "file:///Users/zhangyuling/.m2/repository/") {
+                    authentication(userName: System.env.NEXUS_USERNAME, password: System.env.NEXUS_PASSWORD)
+                }
+                snapshotRepository(url: "http://nexus.example.co/content/repositories/snapshots") {
+                    authentication(userName: "androidSnapshotDeployer", password: "androidSnapshotDeployer")
+                }
+
+                pom.project {
+                    name POM_NAME
+                    packaging POM_PACKAGING
+                    description POM_DESCRIPTION
+                    url POM_URL
+
+                    developers {
+                        developer {
+                            id POM_DEVELOPER_ID
+                            name POM_DEVELOPER_NAME
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

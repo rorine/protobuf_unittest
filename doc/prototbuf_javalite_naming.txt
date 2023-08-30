@@ -1,0 +1,30 @@
+
+
+
+/**
+ * Proto3 field names must be unique after being converted to lowercase with underscores removed.
+ *
+ * see https://developers.google.com/protocol-buffers/docs/style
+ *
+ * 名字映射规则:
+ *
+ * proto filed name     ->  java filed name         ->  java getter name
+ *
+ * event                ->  event_                  ->  getEvent
+ * int_oneof_case       ->  intOneofCaseCase_       ->  getIntOneofCaseCase
+ * andCameralCase       ->  andCameralCase_         ->  getAndCameralCase
+ * name_with_suffix_    ->  nameWithSuffix_         ->  getNameWithPrefix
+ * _name_with_prefix    ->  NameWithPrefix_         ->  getNameWithPrefix
+ * _foo                 ->  Foo_                    ->  getFoo
+ *
+ *
+ * oneof 中所有的field name全部大写，设置为case中的枚举值.
+ * proto filed name         ->  java enum value name    ->  java getter name
+ *
+ * oneof_foo_int            ->  ONEOF_FOO_INT           ->  getOneofFooInt
+ * oneofBarInt              ->  ONEOFBARINT             ->  getOneofBarInt          无法处理
+ * oneof_bar_int_postfix_   ->  ONEOF_BAR_INT_POSTFIX_  ->  getOneofBarIntPostfix
+ * _oneof_bar_int_prefix    ->  _ONEOF_BAR_INT_PREFIX   ->  getOneofBarIntPrefix
+ * Oneof_foo_int_cap        ->  ONEOF_FOO_INT_CAP       ->  getOneofFooIntCap
+ */
+

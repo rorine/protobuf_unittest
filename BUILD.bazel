@@ -1,0 +1,34 @@
+
+################################################################
+# 编译主项目.
+################################################################
+
+load("@io_bazel_rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
+
+MAIN_DEPS = [
+    "@maven//:com_google_code_gson_gson",
+    # 指定依赖的protobuf-javalite版本.
+    "@maven//:com_google_protobuf_protobuf_javalite",
+    "@maven//:org_jetbrains_kotlin_kotlin_stdlib_jdk8",
+]
+
+kt_jvm_library(
+    name = "protobuf_javalite_util",
+    srcs = glob(["src/main/kotlin/**/*.kt"]),
+    deps = MAIN_DEPS,
+    visibility = ["//visibility:public"],
+)
+
+
+################################################################
+# Publish.
+################################################################
+
+load("@rules_jvm_external//:kt_defs.bzl", "kt_jvm_export")
+
+kt_jvm_export(
+  name = "export_protobuf_javalite_util",
+  maven_coordinates = "com.example.lib.moss:protobuf-javalite-util:1.5.4-bazel",
+  srcs = glob(["src/main/kotlin/**/*.kt"]),
+  deps = MAIN_DEPS
+)

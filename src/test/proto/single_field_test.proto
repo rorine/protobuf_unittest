@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package example.app.interface.v1;
+option go_package = "api";
+option java_multiple_files = true;
+option java_package = "com.bapis.example.app.interfaces.v2";
+option objc_class_prefix = "BAPIInterfaceV1Search";
+
+import "google/protobuf/any.proto";
+
+message Able {
+    repeated string a_strings = 1;
+
+    repeated Boy boys = 2;
+
+    repeated Dog dogs = 3;
+
+    repeated int64 a_int64s = 4;
+
+    repeated bytes bytes_array = 5;
+
+    repeated google.protobuf.Any any_list = 6;
+
+    map<string, int64> string_long_map = 7;
+
+    Boy boy = 8;
+
+    google.protobuf.Any biz_object = 9;
+
+    oneof company {
+        Boy boy_oneof = 10;
+        Charles charles_oneof = 11;
+    }
+    // 可以定义，但是java生成代码直接报错.
+    // int32 company_case = 3;
+
+    int32 dog_int = 12;
+    Dog dog_enum = 13;
+
+    bool is_able = 14;
+
+    bytes bytes_instance = 15;
+
+    oneof company_int {
+        int32 int_boy = 16;
+        int64 int_charles = 17;
+    }
+
+    float float_value = 18;
+    double double_value = 19;
+
+    map<string, Dog> map_string_dog = 20;
+    map<string, google.protobuf.Any> map_string_any = 21;
+    map<string, Boy> map_string_boy = 22;
+}
+
+message Boy {
+    string name = 1;
+    int32 count = 2;
+    int64 will_skip = 3;
+    Dog dog = 4;
+}
+
+message Charles {
+}
+
+enum Dog {
+    DogZero = 0;
+    DogOne = 1;
+}

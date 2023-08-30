@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package example.app.interface.v1;
+option go_package = "api";
+option java_multiple_files = true;
+option java_package = "com.bapis.example.app.interfaces.v2";
+option objc_class_prefix = "BAPIInterfaceV1Search";
+
+
+message Country {
+    string c_name = 1;
+    int64 c_population = 2;
+
+    Province province = 3;
+}
+
+message Province {
+    string p_name = 1;
+    int64 p_population = 2;
+
+    City city = 3;
+}
+
+message City {
+    string c_name = 1;
+    int64 c_population = 2;
+
+    map<string, Town> town_map = 3;
+    Town town = 4;
+
+    repeated string bridges = 5;
+    map<bool, string> bridge_map = 6;
+
+    repeated int64 rivers = 7;
+    map<int32, int64> river_map = 8;
+}
+
+message Town {
+    repeated string streets = 1;
+    map<int32, string> street_map = 2;
+}

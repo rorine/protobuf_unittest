@@ -1,0 +1,157 @@
+syntax = "proto3";
+
+package example.app.interface.v1;
+option go_package = "api";
+option java_multiple_files = true;
+option java_package = "com.bapis.example.app.interfaces.v1";
+option objc_class_prefix = "BAPIInterfaceV1Search";
+
+// 测试生成json.
+// import "example/rpc/status.proto";
+import "google/protobuf/any.proto";
+
+message FullReq {
+    int32 building = 1;
+    int64 room = 2;
+    bool is_lockdown = 3;
+    string name = 4;
+
+    Water current_water = 5;
+    repeated Water backup_water = 6;
+
+    Food food = 7;
+
+    map<int32, Fruit> fruits = 8;
+
+    LockdownType lockdown_type = 9;
+
+    oneof event {
+        RoomJoinEvent join = 10;
+        RoomLeaveEvent leave = 11;
+        RoomOnlineEvent online = 12;
+        RoomMessageEvent msg = 13;
+    }
+
+    map<string, google.protobuf.Any> extra = 14;
+
+    oneof int_oneof {
+        int32 foo_int = 15;
+        int64 bar_int = 16;
+    }
+
+    int32 name_with_suffix_ = 17;
+    int64 _name_with_prefix = 18;
+    int32 interface = 19;
+    uint32 uint32_value = 20;
+    sint64 sint64_value = 21;
+
+    map<string, int32> another_map = 22;
+
+    repeated int32 another_list = 23;
+
+    float float_value = 24;
+
+    double double_value = 25;
+
+    bytes bytes_value = 26;
+
+    // key只能是int或者string类型, 不能是enum.
+    // value 可以是任意类型.
+    // map<Food, int32> message_as_key_map = 27;
+
+    repeated LockdownType week_lockdown_type_list = 27;
+
+    repeated google.protobuf.Any week_extra_list = 28;
+
+    map<int32, LockdownType> week_lockdown_type_map = 29;
+
+    string null_string = 30;
+
+    Food null_food = 31;
+
+    repeated Food empty_foold_list = 32;
+
+    oneof enum_oneof{
+        FooEnum foo_enum = 33;
+        BarEnum bar_enum = 34;
+    }
+
+    repeated float some_float_values = 35;
+    repeated double some_double_values = 36;
+    repeated bool some_bool_values = 37;
+}
+
+enum LockdownType {
+    // 封控.
+    LockdownTypeLockdown = 0;
+    // 管控.
+    LockdownTypeControl = 1;
+    // 防范.
+    LockdownTypePrecaution = 2;
+}
+
+message Water {
+    int32 count = 1;
+    Tank tank = 2;
+}
+
+message Tank {
+    int32 volumn = 1;
+}
+
+message Food {
+    int32 count = 1;
+    map<string, RealFood> food_map = 2;
+}
+
+message RealFood {
+    int64 meals = 1;
+}
+
+message Fruit {
+    string name = 1;
+    int64 weight = 2;
+}
+
+message RoomJoinEvent {}
+message RoomLeaveEvent {}
+message RoomOnlineEvent {
+    int32 online = 1;
+    int32 all_online = 2;
+}
+message RoomMessageEvent {
+    string target_path = 1;
+    google.protobuf.Any body = 2;
+}
+message RoomErrorEvent {
+    // example.rpc.Status status = 1;
+}
+
+// Extra info.
+message Time {
+    string date = 1;
+    Clock clock = 2;
+}
+
+message Clock {
+    int32 hour = 1;
+    int32 miniute = 2;
+    int32 second = 3;
+}
+
+// Extra info.
+message Weather {
+    int32 temperature = 1;
+}
+
+enum FooEnum {
+    FooEnum0 = 0;
+    FooEnum1 = 1;
+    FooEnum2 = 2;
+}
+
+enum BarEnum {
+    BarEnum0 = 0;
+    BarEnum1 = 1;
+    BarEnum2 = 2;
+}

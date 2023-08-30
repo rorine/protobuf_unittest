@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package example.dagw.component.avatar.v1.plugin;
+
+option go_package          = "git.example.co/bapis/bapis-go/example/dagw/component/avatar/v1/plugin;plugin";
+option java_multiple_files = true;
+option java_package        = "com.bapis.example.dagw.component.avatar.v1.plugin";
+option objc_class_prefix   = "BAPIDagwComponentAvatarV1Plugin";
+
+message GyroConfig {
+  NFTImageV2 gyroscope = 1;
+}
+
+message NFTImageV2 {
+  // 陀螺仪实体
+  repeated GyroscopeEntityV2 gyroscope = 1;
+}
+
+// 陀螺仪数据实体V2 返回给头像网关
+message GyroscopeEntityV2 {
+  // 展示类型
+  string display_type = 1;
+  // 陀螺仪内容
+  repeated GyroscopeContentV2 contents = 2;
+}
+
+// 陀螺仪内容
+message GyroscopeContentV2 {
+  // 素材链接
+  string file_url = 1;
+  // 放大倍数
+  float scale = 2;
+  // 陀螺仪偏转参数
+  repeated PhysicalOrientationV2 physical_orientation = 3;
+}
+
+// 陀螺仪偏转参数
+message PhysicalOrientationV2 {
+  // 三种偏转方式（gamma, beata）目前只有两种
+  string type = 1;
+  // 偏转角度（正负）
+  repeated float angle = 2;
+  // 陀螺仪偏转动画
+  repeated PhysicalOrientationAnimation animations = 3;
+}
+
+// 陀螺仪偏转动画
+message PhysicalOrientationAnimation {
+  // 偏移（offsetX, offsetY）, 透明度（opacity）
+  string type = 1;
+  // 偏移/透明度数值
+  repeated float value = 2;
+  // bezier曲线
+  string bezier = 3;
+}

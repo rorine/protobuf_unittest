@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package example.app.resource.v1;
+
+
+option go_package = "git.example.co/bapis/bapis-go/example/app/resource/v1";
+option java_multiple_files = true;
+option java_package = "com.bapis.example.app.resource.v1";
+option objc_class_prefix = "BAPIAppResourceV1";
+
+message DownloadReply {
+    string ver = 1;
+    repeated Download resource = 2;
+    map<string, DwTime> dwtime = 3;
+}
+
+message Download {
+    string type = 1;
+    string extra_value = 2;
+    repeated ResourceItem list = 3;
+}
+
+message DownloadReq {
+    // ver 版本号
+    string ver = 1;
+    // 资源类型
+    string type = 2;
+}
+
+message ResourceItem {
+    //业务任务ID
+    string task_id = 1;
+    //业务资源文件名
+    string file_name = 2;
+    //业务资源细分类型
+    string type = 3;
+    //资源下载链接
+    string url = 4;
+    //文件hash值
+    string hash = 5;
+    //文件大小
+    int32 size = 6;
+    //资源下载方式,1为cdn,2为pcdn
+    int32 expect_dw = 7;
+    //资源生效时间
+    int64 effect_time = 8;
+    //资源过期时间
+    int64 expire_time = 9;
+    //下载优先级
+    int32 priority = 10;
+}
+
+message DwTimePiece {
+    int64 start = 1;
+    int64 end = 2;
+}
+
+message DwTime {
+    int32 type = 1;
+    repeated DwTimePiece peak = 2;
+    repeated DwTimePiece low = 3;
+}
